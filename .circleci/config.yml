@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh ubuntu@13.201.80.196 "cd /home/ubuntu/ivend-bench/apps/erpnext"
+            ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@13.201.80.196 "cd /home/ubuntu/ivend-bench/apps/erpnext"
 
 workflows:
   build-and-deploy:
