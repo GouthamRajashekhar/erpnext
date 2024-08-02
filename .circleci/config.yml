@@ -13,15 +13,11 @@ jobs:
             mkdir -p ~/.ssh
             echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
             chmod 600 ~/.ssh/id_rsa
-            echo "$SSH_PUBLIC_KEY" > ~/.ssh/id_rsa.pub
-            chmod 644 ~/.ssh/id_rsa.pub
-            chmod 700 ~/.ssh
-            ssh-keyscan -H 13.201.80.196 >> ~/.ssh/known_hosts
 
       - run:
           name: Deploy to EC2
           command: |
-            ssh -i ~/.ssh/id_rsa.pub ubuntu@13.201.80.196 "touch test.txt"
+            ssh -i ~/.ssh/id_rsa ubuntu@13.201.80.196 "touch test.txt"
 
 workflows:
   version: 2
