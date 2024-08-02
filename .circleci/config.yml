@@ -13,7 +13,7 @@ jobs:
           command: |
             ssh -o StrictHostKeyChecking=no ubuntu@13.201.80.196 '
               cd /home/ubuntu/ivend-bench/apps/erpnext &&
-              git pull upstream develop &&
+              git pull https://github.com/GouthamRajashekhar/erpnext.git develop &&
               ./update_app.sh
             '
 
