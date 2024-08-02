@@ -3,17 +3,30 @@ version: 2.1
 jobs:
   deploy:
     docker:
-      image: cimg/base:current-22.04
+      - image: circleci/python:3.8
     steps:
       - checkout
+      
+      - run:
+          name: Create SSH Directory
+          command: mkdir -p ~/.ssh
+      
       - add_ssh_keys:
           fingerprints:
-            - echo "$SSH_PUBLIC_KEY"
-
+            - "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBXipcex4iY2xbV+pQOEOm8Ro9gUxeg/G6E0quolncq circleci-newdeploy"
+      
       - run:
-          name: Deploy to EC2
+          name: Add SSH Host
           command: |
-            ssh ubuntu@13.201.80.196 "touch test.txt"
+            ssh-keyscan -H 13.201.80.196 >> ~/.ssh/known_hosts
+      
+      - run:
+          name: Create File on EC2
+          command: |
+            ssh -o StrictHostKeyChecking=no ubuntu@y13.201.80.196 << EOF
+            cd /home/ubuntu
+            touch test.txt
+            EOF
 
 workflows:
   version: 2
