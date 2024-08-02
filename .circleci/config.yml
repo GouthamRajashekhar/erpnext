@@ -8,7 +8,7 @@ jobs:
       - checkout
       - add_ssh_keys:
           fingerprints:
-            - "$SSH_PUBLIC_KEY"
+            - echo "$SSH_PUBLIC_KEY"
 
       - run:
           name: Deploy to EC2
