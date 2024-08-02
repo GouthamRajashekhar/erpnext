@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   deploy:
     docker:
-      - image: cimg/base
+      - image: cimg/base:current
     steps:
       - checkout
       - run: echo "Deploying to production server"
