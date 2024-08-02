@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   deploy:
     machine:
-      image: ubuntu-2204:2023.07.2
+      image: cimg/base:current-22.04
     steps:
       - checkout
       - add_ssh_keys:
@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@13.201.80.196 "cd /home/ubuntu/ivend-bench/apps/erpnext"
+            ssh ubuntu@13.201.80.196 "cd /home/ubuntu/ivend-bench/apps/erpnext"
 
 workflows:
   build-and-deploy:
