@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Deploy Over SSH
           command: |
-            chmod 400 $SSH_PRIVATE_KEY
+            chmod +x $SSH_PRIVATE_KEY
             ssh -o StrictHostKeyChecking=no -i $SSH_PRIVATE_KEY ubuntu@13.201.80.196 "cd /home/ubuntu/ivend-bench/apps/erpnext"
 
 workflows:
