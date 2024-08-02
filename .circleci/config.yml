@@ -11,12 +11,7 @@ jobs:
           - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDR29lzxrzrMoxNtC2U2pJDelFsYA3qwTkoKs7yFrnbkb7OMlp2oVu+yHLjAOji2ftkXzmlceOVa4rL/l38t6NPxUg/kMcha5jp0zj213S3MBTUmbHoocDVAp4gBjJtlh/AR8R4c75KP+2hbW5xDXp5MjA2nkQ9Gl7wK7GL6j2hpubWG1bRIkat6l5IzdDOPmjtMVC0nbQKe1FilUDELMlCqyqKsrNg8sk9wS9lMy3ks5RjPzABbAhZmcyQDBHa0YK7yhB9CUpSaKoAba6RTmATLrAhmyaiCMMkPP8XHy81eTUY5FwLoksZ4AT33NHYTPBSxiCYXd0BrEHqyHyOoRClr3W0DV4jeT3Q8ArsP5HRgwyWwbLk4rf7mq7ZVRW00daKEE6IDwOV6YJmrvEJWJgY0jYDk/trvMtaE6SpNJ7L9GAd1AcMcG/M31anhu8oGCG4LBjJQAhQqwPBhCVyrlk74GjXYL3sUTVpncvQkAui6f+Sy0j4MLpgVOnM552xxaSq98H7h8sYcPbC/P1AQB1aFbTY9M4R4bmaXUxHhuYk1YcrPq8OlztLVNBycKkZHIa7FVPJZf2wC0Y0uk8+SQsV+LP9K26gBhkKi1QLHJH3K5InR033Jnp7/uMclb3jRXmZEezhD74uviKXeCzp915mxHDD/gPpI5RVuwr4+ZZwjw== circleci-deploy"
       - run:
         name: Deploy to ec2
-        command: |
-          ssh -o StrictHostKeyChecking=no ubuntu@13.201.80.196 << 'EOF'
-          cd /home/ubuntu/ivend-bench/apps/erpnext
-          git pull https://github.com/GouthamRajashekhar/erpnext.git develop
-          ./update_app.sh
-          EOF
+        command: ssh -o StrictHostKeyChecking=no ubuntu@13.201.80.196 
 
 workflows:
   build_and_test_deploy:
