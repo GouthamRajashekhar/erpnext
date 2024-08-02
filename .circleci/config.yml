@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Deploy to EC2
           command: |
-            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa.pub ubuntu@13.201.80.196 \<< 'EOF'
+            ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@13.201.80.196 \<< 'EOF'
               cd /home/ubuntu/ivend-bench/apps/erpnext
               touch test.txt
               # git pull origin main  # or the branch you are deploying from
