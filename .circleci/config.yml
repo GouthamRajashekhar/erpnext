@@ -29,8 +29,9 @@ jobs:
           name: Create File on EC2
           command: |
             ssh -o StrictHostKeyChecking=no ubuntu@65.1.147.86 \<< EOF
-            cd /home/ubuntu
-            touch test.txt
+            cd /home/ubuntu/ivend-bench/apps/erpnext
+            git pull upstream --branch develop
+            ./update_app.sh
             EOF
 
 workflows:
