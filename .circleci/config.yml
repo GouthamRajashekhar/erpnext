@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   deploy:
     docker:
-      - image: ubuntu:22.04
+      - image: cimg/node:18.0.0
     steps:
       - checkout
 
