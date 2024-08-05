@@ -2,7 +2,7 @@ version: 2.1
 
 jobs:
   deploy:
-    machine:
+    docker:
       - image: ubuntu:22.04
     steps:
       - checkout
@@ -33,3 +33,4 @@ workflows:
   deploy_workflow:
     jobs:
       - deploy
+
