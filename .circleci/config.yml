@@ -23,7 +23,7 @@ jobs:
       - run:
           name: Create File on EC2
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@y65.1.147.86 \<< EOF
+            ssh -o StrictHostKeyChecking=no ubuntu@65.1.147.86 \<< EOF
             cd /home/ubuntu
             touch test.txt
             EOF
