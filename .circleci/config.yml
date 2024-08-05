@@ -3,18 +3,18 @@ version: 2.1
 jobs:
   deploy:
     docker:
-      - image: cimg/node:18.0.0
+      - image: cimg/node:18.20.4
     steps:
       - checkout
 
       - run:
           name: Install SSH Client
           command: |
-            apt-get update && apt-get install -y openssh-client
+            sudo apt-get update && sudo apt-get install -y openssh-client
       
       - run:
           name: Create SSH Directory
-          command: mkdir -p ~/.ssh
+          command: sudo mkdir -p ~/.ssh
       
       - add_ssh_keys:
           fingerprints:
@@ -31,7 +31,7 @@ jobs:
             ssh -o StrictHostKeyChecking=no ubuntu@65.1.147.86 \<< EOF
             cd /home/ubuntu/ivend-bench/apps/erpnext
             git pull upstream develop
-            chmod +x ./update_app.sh
+            sudo chmod +x ./update_app.sh
             ./update_app.sh
             EOF
 
