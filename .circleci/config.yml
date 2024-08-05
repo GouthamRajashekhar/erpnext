@@ -26,11 +26,11 @@ jobs:
             ssh-keyscan -H 65.1.147.86 >> ~/.ssh/known_hosts
       
       - run:
-          name: Create File on EC2
+          name: Update the erpnext_app
           command: |
             ssh -o StrictHostKeyChecking=no ubuntu@65.1.147.86 \<< EOF
             cd /home/ubuntu/ivend-bench/apps/erpnext
-            git pull upstream --branch develop
+            git pull upstream develop
             ./update_app.sh
             EOF
 
