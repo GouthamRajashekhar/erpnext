@@ -133,7 +133,7 @@ jobs:
       - run:
           name: Update the erpnext_app
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@3.110.151.234 << EOF
+            ssh -o StrictHostKeyChecking=no ubuntu@3.110.151.234 \<< EOF
             cd /home/ubuntu/ivend-bench/apps/erpnext
             git pull upstream develop
             bench setup requirements
