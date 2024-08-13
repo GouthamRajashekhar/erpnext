@@ -10,6 +10,9 @@ jobs:
       - run:
           name: Install essential packages
           command: |
+            export DEBIAN_FRONTEND=noninteractive
+            echo "tzdata tzdata/Areas select Etc" | debconf-set-selections
+            echo "tzdata tzdata/Zones/Etc select UTC" | debconf-set-selections
             apt-get update && \
             apt-get install --yes --no-install-suggests --no-install-recommends \
             build-essential \
@@ -54,6 +57,7 @@ jobs:
       - run:
           name: Install Redis
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             apt-get update && \
             apt-get install --yes --no-install-suggests --no-install-recommends redis-server && \
             rm -rf /var/lib/apt/lists/*
@@ -61,6 +65,7 @@ jobs:
       - run:
           name: Install Python 3.11
           command: |
+            export DEBIAN_FRONTEND=noninteractive
             add-apt-repository ppa:deadsnakes/ppa && \
             apt-get update && \
             apt-get install --yes --no-install-suggests --no-install-recommends python3.11 python3.11-dev python3.11-venv python3.11-distutils && \
@@ -84,7 +89,6 @@ jobs:
             rm -rf /tmp/fonts && \
             fc-cache -fv
 
-
       - run:
           name: Install Node.js
           command: |
@@ -105,31 +109,31 @@ jobs:
 
       - run:
           name: Install pip for Python 3.11
-          command: wget https://bootstrap.pypa.io/get-pip.py && python3.11 get-pip.py && rm get-pip.py
-             
+          command: |
+            wget https://bootstrap.pypa.io/get-pip.py && python3.11 get-pip.py && rm get-pip.py
 
       - run:
           name: Install Bench
-          command: python3.11 -m pip install --upgrade frappe-bench==5.22.6
-             
-             
+          command: |
+            python3.11 -m pip install --upgrade frappe-bench==5.22.6
+
       - run:
           name: Create SSH Directory
           command: mkdir -p ~/.ssh
-      
+
       - add_ssh_keys:
           fingerprints:
             - "SHA256:uDoegTrVGuEQAV3JdOekUkvJX0Y8QXuBCvys3ScnLGY"
-      
+
       - run:
           name: Add SSH Host
           command: |
             ssh-keyscan -H 3.110.151.234 >> ~/.ssh/known_hosts
-      
+
       - run:
           name: Update the erpnext_app
           command: |
-            ssh -o StrictHostKeyChecking=no ubuntu@3.110.151.234 \<< EOF
+            ssh -o StrictHostKeyChecking=no ubuntu@3.110.151.234 << EOF
             cd /home/ubuntu/ivend-bench/apps/erpnext
             git pull upstream develop
             bench setup requirements
